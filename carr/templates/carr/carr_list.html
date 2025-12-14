@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carr Shop - Sua Loja de Carros</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚗 Carr Shop</div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'carr_list' %}" class="active">Catálogo</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Bem-vindo à Carr Shop</h1>
+            <p>Encontre o carro perfeito para você</p>
+            <button class="btn-hero" onclick="document.querySelector('.carros-grid').scrollIntoView({behavior: 'smooth'})">Explorar Catálogo</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="filtros-secao">
+            <div class="filtros-header">
+                <div>
+                    <h2>Nossos Carros</h2>
+                    <p class="subtitulo">Confira nossa frota completa de veículos de qualidade</p>
+                </div>
+                <a href="{% url 'carr_criar' %}" class="btn btn-primary">➕ Novo Carro</a>
+            </div>
+        </div>
+
+        <div class="carros-grid">
+            {% if carrs %}
+                {% for carro in carrs %}
+                <div class="carro-card">
+                    <div class="carro-imagem">
+                        <div class="car-icon">🚗</div>
+                        <span class="badge-novo">NOVO</span>
+                    </div>
+                    <div class="carro-info">
+                        <h3>{{ carro.name }}</h3>
+                        <p class="modelo">{{ carro.model }}</p>
+                        <div class="specs">
+                            <span class="spec-item">
+                                <i>📅</i> {{ carro.year }}
+                            </span>
+                        </div>
+                        <div class="preco-box">
+                            <span class="preco">R$ {{ carro.price|floatformat:2 }}</span>
+                        </div>
+                    </div>
+                    <div class="carro-acoes">
+                        <a href="{% url 'carr_detalhe' carro.id %}" class="btn btn-primary">Ver Detalhes</a>
+                        <a href="{% url 'carr_editar' carro.id %}" class="btn btn-secondary">✏️ Editar</a>
+                        <a href="{% url 'carr_deletar' carro.id %}" class="btn btn-danger">🗑️ Deletar</a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="mensagem-vazia-container">
+                    <div class="mensagem-vazia">
+                        <div class="empty-icon">😔</div>
+                        <p>Nenhum carro disponível no momento.</p>
+                        <p class="empty-subtitle">Volte em breve para conferir nossas novidades!</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <section id="sobre" class="secao-sobre">
+            <h2>Por que escolher a Carr Shop?</h2>
+            <div class="beneficios">
+                <div class="beneficio">
+                    <div class="beneficio-icon">✅</div>
+                    <h3>Carros de Qualidade</h3>
+                    <p>Selecionamos apenas os melhores veículos para você</p>
+                </div>
+                <div class="beneficio">
+                    <div class="beneficio-icon">💰</div>
+                    <h3>Preços Competitivos</h3>
+                    <p>Os melhores preços do mercado garantidos</p>
+                </div>
+                <div class="beneficio">
+                    <div class="beneficio-icon">🛡️</div>
+                    <h3>Garantia Total</h3>
+                    <p>Compre com segurança e tranquilidade</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer id="contato" class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Carr Shop</h4>
+                <p>Sua melhor escolha em veículos de qualidade</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <p>📧 contato@carrshop.com</p>
+                <p>📱 (11) 9999-9999</p>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociais</h4>
+                <p>📘 Facebook | 📷 Instagram | 🐦 Twitter</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Carr Shop. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

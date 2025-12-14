@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ carr.name }} {{ carr.model }} - Carr Shop</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚗 Carr Shop</div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'carr_list' %}">Catálogo</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a href="{% url 'carr_list' %}" class="breadcrumb">← Voltar ao Catálogo</a>
+
+        <div class="detalhe-container">
+            <div class="detalhe-imagem">
+                <div class="car-imagem-grande">🚗</div>
+            </div>
+
+            <div class="detalhe-info">
+                <div class="detalhe-header">
+                    <h1>{{ carr.name }}</h1>
+                    <p class="modelo-grande">{{ carr.model }}</p>
+                </div>
+
+                <div class="rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-text">(127 avaliações)</span>
+                </div>
+
+                <div class="preco-grande-box">
+                    <span class="preco-label">Preço</span>
+                    <span class="preco-valor">R$ {{ carr.price|floatformat:2 }}</span>
+                    <p class="preco-info">ou 12x de R$ {{ carr.price|floatformat:2 }}</p>
+                </div>
+
+                <div class="especificacoes">
+                    <h3>Especificações</h3>
+                    <div class="specs-grid">
+                        <div class="spec-card">
+                            <span class="spec-icon">📅</span>
+                            <span class="spec-label">Ano</span>
+                            <span class="spec-valor">{{ carr.year }}</span>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-icon">🏷️</span>
+                            <span class="spec-label">Marca</span>
+                            <span class="spec-valor">{{ carr.name }}</span>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-icon">⚙️</span>
+                            <span class="spec-label">Modelo</span>
+                            <span class="spec-valor">{{ carr.model }}</span>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-icon">🛡️</span>
+                            <span class="spec-label">Garantia</span>
+                            <span class="spec-valor">24 meses</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="descricao">
+                    <h3>Descrição</h3>
+                    <p>Este é um excelente veículo que combina conforto, segurança e performance. Perfeito para quem busca qualidade e confiabilidade. Não perca esta oportunidade!</p>
+                </div>
+
+                <div class="detalhe-acoes">
+                    <button class="btn btn-primary btn-grande" onclick="comprar()">🛒 Comprar Agora</button>
+                    <a href="{% url 'carr_editar' carr.id %}" class="btn btn-primary btn-grande">✏️ Editar</a>
+                    <a href="{% url 'carr_deletar' carr.id %}" class="btn btn-danger btn-grande">🗑️ Deletar</a>
+                </div>
+
+                <div class="seguranca">
+                    <p>✅ Pagamento seguro</p>
+                    <p>✅ Entrega rápida</p>
+                    <p>✅ Garantia de satisfação</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="carros-relacionados">
+            <h2>Carros Similares</h2>
+            <p class="subtitulo">Você também pode gostar destes veículos</p>
+            <div class="mini-grid">
+                <div class="mini-card">
+                    <div class="mini-car">🚗</div>
+                    <h4>Toyota Corolla</h4>
+                    <p>2023</p>
+                    <p class="preco-mini">R$ 85.000</p>
+                    <a href="#" class="btn-mini">Ver</a>
+                </div>
+                <div class="mini-card">
+                    <div class="mini-car">🚗</div>
+                    <h4>Honda Civic</h4>
+                    <p>2023</p>
+                    <p class="preco-mini">R$ 88.000</p>
+                    <a href="#" class="btn-mini">Ver</a>
+                </div>
+                <div class="mini-card">
+                    <div class="mini-car">🚗</div>
+                    <h4>Volkswagen Jetta</h4>
+                    <p>2022</p>
+                    <p class="preco-mini">R$ 75.000</p>
+                    <a href="#" class="btn-mini">Ver</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Carr Shop</h4>
+                <p>Sua melhor escolha em veículos de qualidade</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <p>📧 contato@carrshop.com</p>
+                <p>📱 (11) 9999-9999</p>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociais</h4>
+                <p>📘 Facebook | 📷 Instagram | 🐦 Twitter</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Carr Shop. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+        function comprar() {
+            alert('Funcionalidade de compra em desenvolvimento!');
+        }
+        
+        function favoritar() {
+            alert('Adicionado aos favoritos!');
+        }
+    </script>
+</body>
+</html>

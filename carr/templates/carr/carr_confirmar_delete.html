@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Exclusão - Carr Shop</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚗 Carr Shop</div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'carr_list' %}">Catálogo</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a href="{% url 'carr_detalhe' carro.id %}" class="breadcrumb">← Voltar</a>
+
+        <div class="delete-container">
+            <div class="delete-box">
+                <div class="delete-icon">⚠️</div>
+                <h1>Tem certeza?</h1>
+                <p class="delete-message">
+                    Você está prestes a deletar: <strong>{{ carro.name }} {{ carro.model }} ({{ carro.year }})</strong>
+                </p>
+                <p class="delete-warning">
+                    Esta ação <strong>não pode ser desfeita</strong>. O carro será removido permanentemente do banco de dados.
+                </p>
+
+                <div class="carro-preview">
+                    <div class="preview-item">
+                        <strong>Marca:</strong> {{ carro.name }}
+                    </div>
+                    <div class="preview-item">
+                        <strong>Modelo:</strong> {{ carro.model }}
+                    </div>
+                    <div class="preview-item">
+                        <strong>Ano:</strong> {{ carro.year }}
+                    </div>
+                    <div class="preview-item">
+                        <strong>Preço:</strong> R$ {{ carro.price|floatformat:2 }}
+                    </div>
+                </div>
+
+                <form method="POST" class="delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-grande">🗑️ Confirmar Exclusão</button>
+                    <a href="{% url 'carr_detalhe' carro.id %}" class="btn btn-secundario btn-grande">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Carr Shop</h4>
+                <p>Sua melhor escolha em veículos de qualidade</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <p>📧 contato@carrshop.com</p>
+                <p>📱 (11) 9999-9999</p>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociais</h4>
+                <p>📘 Facebook | 📷 Instagram | 🐦 Twitter</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Carr Shop. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
